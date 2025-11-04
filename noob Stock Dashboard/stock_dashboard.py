@@ -25,20 +25,20 @@ def fetch_weekly_price(symbol):
     return stock.history(period='1y', interval='1wk')
 
 # --- APP ---
-st.title('📊 Stock Dashboard')
+st.title('Stock Dashboard')
 
 symbol = st.text_input('Enter a stock symbol:', 'AAPL').upper()
 
 try:
     info = fetch_stock_info(symbol)
 
-    st.header('🏢 Company Information')
+    st.header('Company Information')
     st.subheader(f"**Name:** {info.get('longName', 'N/A')}")
     st.subheader(f"**Market Cap:** {info.get('marketCap', 'N/A'):,}")
     st.subheader(f"**Sector:** {info.get('sector', 'N/A')}")
 
     # Plot stock price using Altair
-    st.header("📈 Weekly Stock Prices (1Y)")
+    st.header("Weekly Stock Prices (1Y)")
     data = fetch_weekly_price(symbol).reset_index()
     chart = (
         alt.Chart(data)
